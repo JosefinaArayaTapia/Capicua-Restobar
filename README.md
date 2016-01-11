@@ -1,6 +1,6 @@
 # Capicua-Restobar
 
-Creado por Josefina Araya - Cristian Bascuñan
+Proyecto Univeritario - Creado por Josefina Araya - Cristian Bascuñan
 Santiago - Valparaiso
 
 Software creado en PHP y Zend Framework para el manejo de un Restaurant y su fidelizacion de clientes (http://capicua-restobar.cl)
