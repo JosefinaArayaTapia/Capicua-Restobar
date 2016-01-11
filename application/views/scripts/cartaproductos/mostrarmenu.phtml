@@ -1,0 +1,65 @@
+<?php
+$this->title = "Menus";
+$this->headTitle($this->title);
+?>
+<?php $i = 1 ?>
+<div id="enteo-page" style="min-height: 1000px;">
+    <div id="ctn-content">
+        <div class="titulo">
+            <center>
+                <a href="" rel="_blank" target="_self">
+                    <img src="/images/Menus-menu.png" width="750" height="100" alt="menus">
+                </a>
+            </center>
+
+        </div>
+        <div class="menutabs" style="min-height: 1500px;">
+            <!--$nombre es el nombre del tipo producto menus-->
+            <?php foreach ($this->menus as $nombre): ?> 
+                <div class="menutab" >
+                    <?php
+                    if ($i == 1) {
+                        echo "<input type='radio' name='tab-group-1' id='tab-$i' checked>";
+                    } else {
+                        echo "<input type='radio' name='tab-group-1' id='tab-$i' >";
+                    }
+                    echo "<label for='tab-$i'>$nombre[nombre_tipo]</label>";
+                    ?>
+                    <div class="content" "> 
+
+                        <!--nombresmenu es el nombre del menu de carta producto-->
+                        <?php if (count($this->nombresmenu)) : ?>
+                            <?php foreach ($this->nombresmenu as $car): ?>
+                                <?php if ($car->id_tipo_producto == $nombre['id_tipo_producto']): ?>
+                                    <div><a  rel="lightbox" href="/images/carta/<?php echo $car->imagen; ?>" title="<?php echo $car->nombre; ?>" ><img src="/images/carta/<?php echo $car->imagen; ?>" alt="foto" class="fotomenu"> </a> </div>
+                                    <div class ="nombremenu"><h2><?php echo $car->nombre; ?></h2></div>
+                                    <div class="descripcionmenu"><h3><?php echo $car->descripcion; ?></h3></div>
+                                    <div class="precio"><h3><?php echo '$' . $car->precio; ?></h3></div>
+                                    <div class="fechamenu">
+
+                                        <?php
+                                        /* Conversion de Fecha */
+                                        $date = $car->fecha_publicacion;
+                                        $dia = explode("-", $date, 3);
+                                        $year = $dia[0];
+                                        $month = (int) $dia[1];
+                                        $day = (int) $dia[2];
+                                        ?>
+                                        <h2> <?php echo $day . " / " . $month; ?><br>
+                                            <?php echo $year; ?></h2>
+
+                                    </div>
+                                    <div class="artprd-item"></div>
+                                    <div class="artprd-item"></div>
+                                    <br>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <?php $i++; ?>                                  
+                        <?php else : echo 'No hay Datos'; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<?php
+$this->title = "Listado Tipo Publicaciones";
+$this->headTitle($this->title);
+?>
+
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Lista de Tipos de Publicaciones
+            </p>
+             <div class="diseñotablas">
+                 <a href="/administrador/agregartipopublicacion/" style="text-decoration:none"><button class="botonnaranjo orange" >Agregar</button></a>
+                 <table cellspacing="10%" cellpadding="10%">
+                    <tr align = center  BGCOLOR="ccff66">
+                        <td width="2%"><font><u>Nombre Tipo Publicacion</u></font></td>
+                        <td width="2%"><font><u>Visibilidad</u></font></td>
+                        <td width="2%"><font><u>&nbsp;</u></font></td>
+                        <td width="2%"><font><u>&nbsp;</u></font></td>
+                    </tr>
+
+                    <?php if (count($this->paginator)) : ?>
+
+                        <?php foreach ($this->paginator as $tipo) : ?>
+
+                            <tr align="center" bgcolor="ffff99">
+                                <td><?php echo $tipo->nombre_tipo; ?></td>
+                                
+                                     <?php if ($tipo->visibilidad == 1) { ?>
+                                        <td width="2%">Activo</td> 
+                                    <?php } else { ?>
+                                        <td width="2%">Inactivo</td> 
+                                    <?php } ?>
+                                        
+                                <td align="center"><a href="/administrador/editarvisibilidadtipopublicacion/id/<?php echo $tipo->id_tipo_publicacion; ?>"><button  class="buttonedit" style="margin-left: 14px">Editar Visibilidad</button></a></td>
+
+                                <td align="center"><a href="/administrador/editartipopublicacion/id/<?php echo $tipo->id_tipo_publicacion; ?>"><button class="buttonedit" style="margin-left: 43px">Editar</button></a></td>
+                            </tr>
+
+
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay datos</td>
+                        </tr>
+
+                    <?php endif; ?>
+
+
+
+
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

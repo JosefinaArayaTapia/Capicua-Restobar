@@ -1,0 +1,60 @@
+<?php
+$this->title = "Editar Reserva";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content" style ="height: 1300px">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title" style="margin-left: 131px"><img src="/images/guardar.png"> Editar Reservas </p>
+
+                <form class="div_form" method="POST" action="/administrador/editarreserva" style="width: 65%; height: 1250px; margin-left:2%">
+
+                    <table style="width: 90%; margin-left:0%">
+                        <tbody>
+                            <tr style="width: 100%; margin-left:0%">
+                                <td >Nombre de Cliente</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('nombre_cliente')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>  
+                            <tr style="width: 100%; margin-left:0%">
+                                <td>Email Cliente</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('email')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>
+                            <tr style="width: 100%; margin-left:0%">
+                                <td> Cantidad de Personas</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('personas')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>
+                            <tr style="width: 100%; margin-left:0%">
+                                <td>Observacion</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('observacion')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>
+
+                            <tr style="width: 100%; margin-left:0%">
+                                <td>Fecha a Reservar</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('fecha_reserva')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>
+                            <tr style="width: 100%; margin-left:0%">
+                                <td>Fecha Realizada</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;">  <?php echo $this->form->getElement('fecha_realizacion')->setAttrib('readonly', 'readonly'); ?></td>
+                            </tr>
+                            <tr style="width: 100%; margin-left:0%">
+                                <td>Estado de Reserva</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;">  <?php echo $this->form->getElement('tipoestado'); ?></td>
+                            </tr>
+
+                            <tr style="width: 100%; margin-left:0%">
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->form->getElement('id_reserva'); ?></td>
+                                <td> <?php echo $this->form->getElement('Confirmar'); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

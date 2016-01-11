@@ -1,0 +1,79 @@
+<?php
+$this->title = "Reportes";
+$this->headTitle($this->title);
+?>
+
+
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+
+        <div class="center">
+
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Reportes
+            </p>
+
+            <form class="div_form"  method="POST" action="/reportes" name="ffiltros">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Tipo Reporte</td>
+                            <td><?php echo $this->form->getElement('tipo')->setAttrib('onclick', 'mostrarReferencia()'); ?></td>
+                        </tr> 
+
+                        <tr id="getcliente" >
+                            <td> Cliente</td>
+                            <td><?php echo $this->form->getElement('cliente')->setAttrib('readonly', 'readonly'); ?></td></div>
+                        </tr>
+
+                        <tr align="center" valign="middle"> 
+                            <td colspan="2">Si no Ingresa Fechas, el reporte será historico</td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>Fecha Inicio</td>
+                            <td><?php echo $this->form->getElement('from'); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha Final</td>
+                            <td><?php echo $this->form->getElement('to'); ?></td>
+                        </tr>
+                        <tr>
+
+                            <td> <?php echo $this->form->getElement('Ejecutar'); ?></td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+
+                <!--                            <//se le asigna un name al formulario de contacto.
+                                <form action="" method="post" name="fcontacto">
+                                                    //inputs
+                
+                                    <p>A través de donde nos has conocido:<br />
+                                                            //importante llamar a la función
+                                        <input type="radio" name="Conocido" value="Google" id="Conocido_0" onclick="mostrarReferencia();" /> Google
+                                        <input type="radio" name="Conocido" value="Otros" id="Conocido_1" onclick="mostrarReferencia();" /> Otros
+                                    </p>
+                
+                                                    //div oculto
+                                    <div id="desdeotro" style="display:none;">
+                                        <p>Referencia de la oferta:</p>
+                                        <p><input type="text" name="otro" class="input" /></p>
+                                    </div>-->
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div id="enteo-page">
+    <center>
+        <a href="" rel="_blank" target="_self">
+            <img src="/images/publicaciones.png" width="750" height="100" alt="menus">
+        </a>
+    </center>
+    <div id="ctn-content">
+
+        <div class="center">
+            <?php
+            if (count($this->publicacion)):
+                foreach ($this->publicacion as $pub) :
+                    $this->headTitle('Publicacion - ' . $pub->titulo);
+                    $id_publicacion_1 = $pub->id_publicacion;
+                    ?>
+                    <div class="postg">
+                        <div class="ribbon-wrapper-green">
+                            <div class="ribbon-green"><?php echo $pub->nombre_tipo ?></div>
+                        </div>
+                        <div class="fecha">
+                            <?php
+                            /* Conversion de Fecha */
+                            $date = $pub->fecha_publicacion;
+                            $dia = explode("-", $date, 3);
+                            $year = $dia[0];
+                            $month = (string) (int) $dia[1];
+                            $day = (string) (int) $dia[2];
+                            $dias = array("domingo", "lunes", "martes", "mi&eacute;rcoles", "jueves", "viernes", "s&aacute;bado");
+                            $tomadia = $dias[intval((date("w", mktime(0, 0, 0, $month, $day, $year))))];
+                            $meses = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+                            echo '</br>';
+                            ?>
+                            <h2><?php echo $tomadia . ", " . $day . " de " . $meses[$month] . " de " . $year; ?></h2>
+                        </div>
+                        <div>
+                            <img src="<?php echo $this->baseUrl(); ?>/images/publicaciones/<?php echo $pub->imagen; ?>" alt="foto" class="imagenpublicacion" >
+                        </div>
+                        <div class="titulopublicacion" >
+                            <p><?php echo $pub->titulo; ?></p>
+                        </div>
+                        <?php
+                        $vigencia = $pub->fecha_vigencia;
+                        $dia2 = explode("-", $vigencia, 3);
+                        $year2 = $dia[0];
+                        $month2 = (string) (int) $dia2[1];
+                        $day2 = (string) (int) $dia2[2];
+//                    $dias = array("domingo", "lunes", "martes", "mi&eacute;rcoles", "jueves", "viernes", "s&aacute;bado");
+                        $tomadia2 = $dias[intval((date("w", mktime(0, 0, 0, $month2, $day2, $year2))))];
+//                    $meses = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+                        ?>
+                        <div class="contenidopublicacion">
+                            <p><?php echo $pub->contenido; ?></p>
+                        </div>
+                        <div class="tagggs">
+                            <ul class="tags">
+                                <li><a href="">Hecho por: <?php echo $pub->nombre ?></a></li>
+                                <li><a href="">Vigencia:<?php echo $tomadia2 . " " . $day2 . " de " . $meses[$month2] . " del " . $year2; ?></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="trigger" id="<?php echo $pub->id_publicacion; ?>">
+                        <span><a><?php echo $this->numerocomentarios; ?></a></span>
+                    </div>  
+                    <div  class="toggle">
+
+                        <?php if ($this->id_user): ?>
+                            <div id="twitter-container">
+                                <form id="tweetForm" action="/publicaciones/agregarcomentario" method="post">
+
+                                    <div id="destacado" class="comenta">
+                                        <span class="nom_cat tit_lat">Comenta este artículo</span>
+                                    </div>    
+                                    <div class="sttimg">
+                                        <img src="<?php echo $this->baseUrl(); ?>/images/usuarios/<?php echo $this->fotoperfil ?>" class='big_face'/>
+                                    </div> 
+                                    <?php echo $this->form->getElement('inputField'); ?>
+                                    <?php echo $this->form->getElement('comenta')->removeDecorator('Label'); ?>
+                                    <?php echo $this->form->getElement('postid')->setValue($id_publicacion_1); ?>
+                                    <?php echo $this->form->getElement('iduser')->setValue($this->id_user); ?>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                        <?php else: ?>
+                        <h1>Ud Debe estar registrado para comentar. Hagalo <a href="/usuario/registrarcliente"> aca </a> </h1>
+
+                        <?php endif; ?>
+                        <div id="comentarios">
+                            <?php
+                            foreach ($this->comm as $data) :
+                                $id_publicacion = $data->id_publicacion;
+                                $comentario = $data->cuerpo;
+                                if ($id_publicacion == $id_publicacion_1) {
+                                    ?>
+                                    <div class="stbody" id="stbody<?php echo $data->id_comentario; ?>">
+                                        <div class="sttimg"><img src="<?php echo $this->baseUrl(); ?>/images/usuarios/<?php echo $data->foto_perfil ?>" class='big_face'/></div> 
+                                        <div class="sttext">
+                                            <div class="nombreusuario"><p><?php echo $data->nombre ?></p></div> 
+                                            <?php if ($this->tipo_user && $this->tipo_user == 1): ?>
+                                                <a href="<?php echo $this->baseUrl(); ?>/publicaciones/eliminarcomentario/id/<?php echo $data->id_comentario; ?>"  class="stdelete" title="Borrar comentario">X</a>
+                                            <?php endif; ?>
+                                            <p><?php echo $comentario; ?></p>
+
+                                            <?php
+                                            //Calcular hace cuanto fue el comentario
+                                            $fechacomentario = $data->fecha;
+                                            ?>
+                                            <div class="sttime">Comentado el :<?php echo $fechacomentario ?></div> 
+                                        </div> 
+                                    </div> 
+                                    <?php
+                                }
+                            endforeach;
+                            ?>
+                        </div>
+                        <?php if (count($this->comm)): ?>
+                            <?php echo $this->comm; ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php
+                endforeach;
+            else :
+                echo 'no hay datos';
+            endif;
+            ?>
+        </div>
+        <div class="right">
+            <?php echo $this->render('/banner/banner.phtml') ?>
+
+        </div>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,33 @@
+<?php
+$this->title = "Ingresar Usuario";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <center>
+            <p class="sidebar-title" style="margin-left: -47px">
+                <img src="/images/guardar.png">
+                Ingresar
+            </p>
+        </center>
+        <div class="div_login">
+            
+            <form enctype="application/x-www-form-urlencoded" action="" method="post">
+                <div class="div_form">
+                    <?php
+                    echo $this->form->getElement('email');
+                    echo $this->form->getElement('password');
+                    ?>  
+
+                    <div style="margin-left:171px; margin-bottom: 30px;">
+
+                        <? echo $this->form->getElement('Ingresar'); ?>
+                    </div>
+<!--                    <p class="botonsubmit">
+                        <input type="submit" name="Ingresar" id="Ingresar" value="Ingresar" class="submit-group">
+                    </p>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

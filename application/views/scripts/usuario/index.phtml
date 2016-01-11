@@ -1,0 +1,54 @@
+<?php
+$this->title = "Cliente";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-cliente.phtml') ?>
+
+        <div class="center">
+
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Mi Perfil</p>
+            </div>
+            <?php foreach ($this->datosuser as $dato): ?>
+                <div class="div1perfil">
+                    <img src ="/images/usuarios/<?php echo $dato->foto_perfil; ?>" alt ="foto" class="imagendeperfil" >
+                </div>
+                <div class="div2perfil">
+                    <table cellspacing="80%" cellpadding="80%" style="margin-top: -17px; margin-right:8px;  padding: 26px 0px 3px 8px;">
+                        <tr>
+                            <td width="50%" align = center  bgcolor="ccff66"><font>Nombre</font></td>
+                            <td width="50%" align="center"bgcolor="ffff99"><font><b><?php echo $dato->nombre . " " . $dato->apellido; ?></b></font></td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align = center  bgcolor="ccff66"><font>Email</font></td>
+                            <td width="50%" align="center"bgcolor="ffff99"><font><b><?php echo $dato->email; ?></b></font></td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align = center  bgcolor="ccff66"><font>Puntos Acumulados</font></td>
+                            <td width="50%" align="center"bgcolor="ffff99"><font><b><?php echo $dato->puntos_acumulados; ?></b></font></td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align = center  bgcolor="ccff66"><font>Fecha de Alta</font></td>
+                            <?php
+                            $date = $dato->fecha_alta;
+                            $dia = explode("-", $date, 3);
+                            $year = $dia[0];
+                            $month = (string) (int) $dia[1];
+                            $day = (string) (int) $dia[2];
+                            $time = explode(":", $date, 3);
+                            $hora = explode(" ", $time[0], 2);
+                            $min = (string) (int) $time [1];
+                            $min2 = str_pad((int) $min, 2, "0", STR_PAD_LEFT)
+                            ;?>
+                            
+                            <td width="50%" align="center"bgcolor="ffff99"><font><b><?php echo $day . " - " . $month . " - " . $year . " " . "/" . " " . $hora[1] . ":" . $min2; ?></b></font></td>
+                        </tr>  
+                    </table>
+
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>

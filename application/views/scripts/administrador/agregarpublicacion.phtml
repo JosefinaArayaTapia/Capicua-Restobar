@@ -1,0 +1,28 @@
+<?php
+$this->title = "Agregar Publicacion";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Hacer Publicación
+            </p>
+
+            <?php
+            $user = Capicua_Facebook::getUser();
+            if (!$user) {
+                $homeurl = 'http://capicua-restobar.cl/administrador/agregarpublicacion';  //return to home
+                $fbPermissions = 'publish_stream,manage_pages';
+                $loginUrl = Capicua_Facebook::getLoginUrl(array('redirect_uri' => $homeurl, 'scope' => $fbPermissions));
+                echo '<div class="loginface"><a href="' . $loginUrl . '"><img src="/images/facebooklogin.png" border="0"></a></div>';
+            } else {
+
+                echo $this->form;
+            }
+            ?>
+        </div>
+    </div>
+</div>

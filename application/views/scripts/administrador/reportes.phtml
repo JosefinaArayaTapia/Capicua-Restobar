@@ -1,0 +1,38 @@
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Reportes
+            </p>
+            <div  class="div_listar">
+                <table>
+                    <tr>
+                        <td>Cliente</td>
+                        <td>Venta</td>
+                        <td>Cantidad Producto</td>
+                        <td>Producto</td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php foreach ($this->paginator as $post) : ?>
+                            <tr>
+                                <td><?php echo $post->Cliente; ?></td>
+                                <td><?php echo $post->fecha; ?></td>
+                                <td><?php echo $post->cantidad_producto; ?></td>
+                                <td><?php echo $post->nombre; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay datos</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

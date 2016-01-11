@@ -1,0 +1,96 @@
+<div id="ctn-header">
+    <div class="zone-logo">
+        <a id="link-home" href="/index" title="Inicio">&nbsp;</a>
+        <div class="socials">
+            <a href="http://www.facebook.com/RestobarCapicua" target="_blank">
+                <img src="/images/fb_off.png" width="33" height="33" alt="Facebook" /></a>
+            <a href="https://twitter.com/CapicuaRestobar" target="_blank">
+                <img src="/images/twitter_off.png" width="33" height="33" alt="Twitter" /></a>
+        </div>
+    </div>
+
+
+    <div class="zone-client">
+        <div class="banderole">&nbsp;</div>
+
+        <?php
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) :
+            ?>
+            <div class="compte">
+                <div class="titre cufon-chalet">Iniciar Sesion</div>
+                <div class="info2">
+                    <a class="btn2" href="/usuario/login" title="Ingresar">Ingresar</a>
+                </div>
+                <div class="info2">
+                    <a class="btn2" href="/usuario/registrarcliente" title="Ingresar">Registrarse</a>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="compte">
+                <div class="fotoperfil">
+                    <a href="/usuario/">
+                        <img src="/images/usuarios/<?php echo $this->whatever; ?>" width="100" height="100">
+                    </a>
+                </div>
+                <?php if ($this->tipo_user != 1): ?>
+                    <div class="nombreusuario" style="margin-top: -103px">
+                        <p class="p2">Usuario:<b><?php echo $this->name . " " . $this->apellido; ?></b></p>
+                    </div>
+                    <div class="botonverperfil">
+                        <a href="/usuario/" style="text-decoration:none; "><button class="botonnaranjo orange" style="margin-top: 69px; font-size: 25px; margin-left: 2px; padding: 5px;" title="Ver Mi Perfil"> Mi Perfil</button></a>
+                    </div>
+                    <div class="botonsalir">
+                        <a href="/usuario/logout">
+                            <img  style="margin-left: 87px; margin-top: -2px;" src="/images/cerrar.png"  alt="Salir"  title="Salir" class="botonsalir"> 
+                        </a>
+
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($this->tipo_user == 1): ?>
+                    <?php if ($this->permiso == 1): ?>
+                        <div class="nombreusuario">
+                            <p class="p2">Super Administrador:<b><?php echo $this->name . " " . $this->apellido; ?></b></p>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($this->permiso == 2): ?>
+                        <div class="nombreusuario">
+                            <p>Administrador:<b><?php echo $this->name . " " . $this->apellido; ?></b></p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="ultimoacesso">
+                        <?php
+                        $date = $this->ultimo;
+                        $dia = explode("-", $date, 3);
+                        $year = $dia[0];
+                        $month = (string) (int) $dia[1];
+                        $day = (string) (int) $dia[2];
+                        $time = explode(":", $date, 3);
+                        $hora = explode(" ", $time[0], 2);
+                        $min = (string) (int) $time [1];
+                        $min2 = str_pad((int) $min, 2, "0", STR_PAD_LEFT);
+                        echo '</br>';
+                        ?>
+                        <p class="p2"style="width: 273px;">Ultimo Acceso: <b><?php echo $day . " - " . $month . " - " . $year . " " . "/" . " " . $hora[1] . ":" . $min2 ?> </b></p>
+                    </div>
+                    <div class="botonverperfil">
+                        <a href="/administrador/" style="text-decoration:none; "><button class="botonnaranjo orange" style="margin-top: 98px; font-size: 25px; margin-left: 2px;" title="Panel de Administrador"> Panel Administracion</button></a>
+                    </div>
+                    <div class="botonsalir">
+                        <a href="/administrador/logout">
+                            <img src="/images/cerrar.png"  alt="Salir"  title="Salir" class="botonsalir"> 
+                        </a>
+
+                    </div>
+
+
+
+                <?php endif; ?>
+
+            </div>
+        <?php endif; ?>
+
+
+    </div>
+</div>  

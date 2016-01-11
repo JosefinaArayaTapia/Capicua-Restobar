@@ -1,0 +1,104 @@
+<?php
+$this->title = "Capicua RestoBar";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <div class="centerindex">
+          <div class="div_slideshow">
+            <div id="slideshow" >
+                <ul>
+                    <li>
+                        <img src="images/mesa.png" alt="" title="Las Mejores Cenas para compartir un grato momento con quien quieras" style=" height: 250px;"/>
+                    </li>
+                    <li>
+                        <img src="images/cervezas2.jpg" alt="" title=" La mejores Cervezas las encuentras en Capicua Restobar"style=" height: 250px;" />
+                    </li>
+                    <li>           
+                        <img src="images/food.jpg" alt="" title="Los Mejores Sandwich los encuentras en nuestro Restaurante Capicua, ven a probarlos...... te encantaran" style=" height: 250px;"/>
+                    </li>
+                </ul>
+            </div>
+          </div>
+
+            <?php $i = 1 ?>
+            <div id="threecolumns">
+
+                <?php if (count($this->publicaciones)): ?>
+                    <?php
+                    foreach ($this->publicaciones as $pub) :
+                        $id_publicacion_1 = $pub->id_publicacion;
+                        ?>
+                        <div class="postg">
+                            <div class="ribbon-wrapper-green">
+                                <div class="ribbon-green"><?php echo $pub->nombre_tipo ?></div>
+                            </div>
+                            <div class="fecha">
+                                <?php
+                                /* Conversion de Fecha */
+                                $date = $pub->fecha_publicacion;
+                                $dia = explode("-", $date, 3);
+                                $year = $dia[0];
+                                $month = (string) (int) $dia[1];
+                                $day = (string) (int) $dia[2];
+                                $dias = array("domingo", "lunes", "martes", "mi&eacute;rcoles", "jueves", "viernes", "s&aacute;bado");
+                                $tomadia = $dias[intval((date("w", mktime(0, 0, 0, $month, $day, $year))))];
+                                $meses = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+                                echo '</br>';
+                                ?>
+                                <h2><?php echo $tomadia . ", " . $day . " de " . $meses[$month] . " de " . $year; ?></h2>
+                            </div>
+                            <div>
+                                <img src="/images/publicaciones/<?php echo $pub->imagen; ?>" alt="foto" class="imagenpublicacion" >
+                            </div>
+                            <div class="titulopublicacion" >
+                                <p><?php echo $pub->titulo; ?></p>
+                            </div>
+                            <?php
+                            $vigencia = $pub->fecha_vigencia;
+                            $dia2 = explode("-", $vigencia, 3);
+                            $year2 = $dia[0];
+                            $month2 = (string) (int) $dia2[1];
+                            $day2 = (string) (int) $dia2[2];
+//                    $dias = array("domingo", "lunes", "martes", "mi&eacute;rcoles", "jueves", "viernes", "s&aacute;bado");
+                            $tomadia2 = $dias[intval((date("w", mktime(0, 0, 0, $month2, $day2, $year2))))];
+//                    $meses = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+                            ?>
+                            <div class="contenidopublicacion">
+                                <p><?php echo $pub->contenido; ?></p>
+                            </div>
+                            <div class="tagggs">
+                                <ul class="tags">
+                                    <li><a href="">Hecho por: <?php echo $pub->nombre ?></a></li>
+                                    <li><a href="">Vigencia:<?php echo $tomadia2 . " " . $day2 . " de " . $meses[$month2] . " del " . $year2; ?></a></li>
+
+                                </ul>
+                            </div>
+                            <div class="MBT-readmore"><a href="/publicaciones/post/nn/<?php echo $pub->id_publicacion; ?>">Ver Mas »</a></div>
+
+                        </div>
+
+                    <?php endforeach; ?>                
+                <?php else : ?>
+
+                <?php endif; ?>
+            </div>
+            <div  class="right">
+                <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FRestobarCapicua&amp;width=245&amp;height=590&amp;show_faces=true&amp;colorscheme=light&amp;stream=true&amp;show_border=true&amp;header=true&amp;appId=257023324435674" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:245px; height:590px;" allowTransparency="true"></iframe>  
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="/js/craftyslide.min.js"></script>
+<script>
+    $("#slideshow").craftyslide({
+        'width': 800,
+        'height': 200,
+        'pagination':true,
+        'fadetime': 50,
+        'delay': 2500
+    });
+</script> 

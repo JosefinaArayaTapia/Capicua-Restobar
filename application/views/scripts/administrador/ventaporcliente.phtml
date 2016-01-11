@@ -1,0 +1,106 @@
+<?php
+$this->title = "Reporte Ventas";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+       <?php
+            if (count($this->paginator)) :
+                foreach ($this->paginator as $res):
+                    $nombrecliente = $res->cliente;
+                    $apellido = $res->apellido;
+                endforeach;
+                ?>
+                <p class="sidebar-title"><img src="/images/guardar.png"> Ventas de Cliente: <?php echo $nombrecliente . " " . $apellido; ?></p>
+            <?php endif; ?>
+            <div class="diseñotablas">
+                
+                <table cellspacing="10%" cellpadding="10%">
+                    <tr align = center  BGCOLOR="ccff66">
+                        <td width="2%"><font><u>Nombre</u></font></td>
+                    <td width="4%"><font><u>Fecha</u></font></td>
+                    <td width="4%"><font><u>Mesa</u></font></td>
+                    <td width="2%"><font><u>Descuento Hecho</u></font></td>
+                    <td width="2%"><font><u>Puntos Venta</u></font></td>
+                    <td width="2%"><font><u>Total Venta</u></font></td>
+                    <td width="2%"><font><u>Cantidad</u></font></td>
+                    <td width="2%"><font><u>Producto</u></font></td>
+                    <td width="2%"><font><u>Precio Unitario</u></font></td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php
+                        $id_prueba = 0;
+                        $fecha = 0;
+                        $total = 0;
+                        ?>
+                        <?php foreach ($this->paginator as $tipo) : ?>
+                            <tr align="center" bgcolor="ffff99">
+                                <?php
+                                if ($tipo->id_usuario != $id_prueba):
+                                    $id_prueba = $tipo->id_usuario;
+                                    ?>
+                                    <td><?php echo $tipo->cliente . " " . $tipo->apellido; ?></td>
+
+                                <?php else: ?>
+                                    <td></td>
+                                <?php endif;
+                                ?>
+                                <?php
+                                if ($tipo->fecha != $fecha):
+                                    /* Conversion de Fecha */
+                                    $date = $tipo->fecha;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT);
+                                    $day = (string) (int) $dia[2];
+                                    $day2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT);
+                                    $time = explode(":", $date, 3);
+                                    $hora = explode(" ", $time[0], 2);
+                                    $min = (string) (int) $time [1];
+                                    $min2 = str_pad((int) $min, 2, "0", STR_PAD_LEFT);
+
+                                    $fecha = $tipo->fecha;
+                                    ?>
+                                    <td><?php echo $day2 . " - " . $month2 . " - " . $year . " " . "/" . " " . $hora[1] . ":" . $min2; ?></td>
+
+                                <?php else: ?>
+                                    <td></td>
+                                <?php endif; ?>
+
+                                <?php
+                                if ($tipo->total != $total):
+                                    $total = $tipo->total;
+                                    ?>
+                                    <td><?php echo $tipo->mesa; ?></td>
+                                    <td><?php echo $tipo->descuento; ?></td>
+                                    <td><?php echo $tipo->puntos_venta; ?></td>
+                                    <td><?php echo $tipo->total; ?></td>
+                                <?php else: ?>
+                                    <td></td>  
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                <?php endif; ?>
+
+                                <td><?php echo $tipo->cantidad_producto; ?></td>
+                                <td><?php echo $tipo->nombre; ?></td>
+                                <td><?php echo $tipo->precio; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay datos</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

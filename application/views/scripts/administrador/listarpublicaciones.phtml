@@ -1,0 +1,74 @@
+<?php
+$this->title = "Listado Publicaciones";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content" style=" height:870px">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Listado de Publicaciones </p>
+                <div class="diseñotablas">
+                    <a href="/administrador/agregarpublicacion/" style="text-decoration:none"><button class="botonnaranjo orange" >Agregar</button></a>
+                    <table cellspacing="10%" cellpadding="30%">
+                        <tr align = center  BGCOLOR="ccff66">
+                            <td width="2%"><font><u>Titulo</u></font></td>
+                        <td width="2%"><font><u>Contenido</u></font></td>
+                        <td width="2%"><font><u>Fecha</u></font></td>                    
+                        <td width="2%"><font><u>Vigencia</u></font></td>
+                        <td width="2%"><font><u></u></font></td>
+                        <td width="2%"><font><u></u></font></td>
+
+                        </tr>
+
+                        <?php if (count($this->paginator)) : ?>
+                            <?php foreach ($this->paginator as $res): ?>
+
+                                <tr align="center" bgcolor="ffff99" >
+
+                                    <td width="2%"><?php echo $res->titulo; ?></td>
+                                    <td width="2%"><?php echo $res->contenido; ?></td>
+                                    <?php
+                                    $date = $res->fecha_publicacion;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $day = (string) (int) $dia[2];
+                                    $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT);
+                                    $dia2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT)
+                                    ;
+                                    ?>
+                                    <td width = "2%"><?php echo $dia2 . " - " . $month2 . " - " . $year; ?></td>
+
+                                    <?php 
+                                    $fecha2 = $res->fecha_vigencia;
+                                    $d = explode("-", $fecha2, 3);
+                                    $year2 = $d [0];
+                                    $month3 = (string) (int)$d[1];
+                                    $day3 = (string) (int) $d[2];
+                                    $month4 = str_pad((int) $month3, 2, "0", STR_PAD_LEFT);
+                                    $dia4 = str_pad((int) $day3, 2, "0", STR_PAD_LEFT)
+                                    ;?>
+                                    <td width="2%"><?php echo $dia4 . " - " . $month4 . " - " . $year2; ?></td>
+                                    <td width="2%"><a href="/administrador/editarpublicaciones/id/<?php echo $res->id_publicacion ?>"><button  class="buttonedit" style="margin-left: 14px">Editar</button></a></td>
+                                    <td width="2%"><a href="/administrador/borrarpublicaciones/id/<?php echo $res->id_publicacion ?>"><button  onclick="if (confirm('¿Esta seguro de eliminar?')) { document.location = '/administrador/borrarpublicaciones/id/<?php echo $res->id_publicacion ?>'; } return false;" class="buttonedit" style="margin-left: 14px">Borrar</button></a></td>
+                            <?php endforeach; ?>
+                            </tr>
+<?php else : ?>
+                            <tr>
+                                <td colspan="3">No hay Datos</td>
+                            </tr>
+
+<?php endif; ?>
+
+                    </table>
+                    <?php if (count($this->paginator)): ?>
+                        <?php echo $this->paginator; ?>
+<?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<?php
+$this->title = "Listado Reservas";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content" style="height: 750px">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Listado de Productos </p>
+                <div class="diseñotablas">
+                    <a href="/administrador/agregarproducto/" style="text-decoration:none"><button class="botonnaranjo orange" >Agregar</button></a>
+                    <table cellspacing="10%" cellpadding="30%">
+                        <tr align = center  BGCOLOR="ccff66">
+                        <td width="2%"><font><u>Nombre</u></font></td>
+                        <td width="2%"><font><u>Tipo</u></font></td>
+                        <td width="2%"><font><u>Descripcion</u></font></td>                    
+                        <td width="2%"><font><u>Precio</u></font></td>
+                        <td width="2%"><font><u>Puntos</u></font></td>
+                        <td width="2%"><font><u></u></font></td>
+                        <td width="2%"><font><u></u></font></td>
+
+                        </tr>
+
+                        <?php if (count($this->paginator)) : ?>
+                            <?php foreach ($this->paginator as $res): ?>
+
+                                <tr align="center" bgcolor="ffff99" >
+
+                                    <td width="2%"><?php echo $res->nombre; ?></td>
+                                    <td width="2%"><?php echo $res->nombre_tipo; ?></td>
+                                    <td width="2%"><?php echo $res->descripcion; ?></td>
+                                    <td width="2%"><?php echo $res->precio; ?></td>
+                                    <td width="2%"><?php echo $res->puntos_producto; ?></td>
+                                    <td align="2%"><a href="/administrador/editarproductos/id/<?php echo $res->id_producto ?>"><button class="buttonedit">Editar</button></a></td>
+                                    <td align="2%"><a href="/administrador/borrarproductos/id/<?php echo $res->id_producto ?>"><button class="buttonedit" onclick="if (confirm('¿Esta seguro de eliminar?')) { document.location = 'borrarproductos/id/<?php echo $res->id_producto ?>'; } return false;" class="buttonedit">Borrar</button></a></td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="3">No hay Datos</td>
+                            </tr>
+
+                        <?php endif; ?>
+
+                    </table>
+                    <?php if (count($this->paginator)): ?>
+                        <?php echo $this->paginator; ?>
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

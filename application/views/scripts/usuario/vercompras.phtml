@@ -1,0 +1,79 @@
+<?php
+$this->title = "Ver Compras";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-cliente.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">Mis Compras
+            </p>
+            <div class="diseñotablas">
+                <table cellspacing="10%" cellpadding="30%">
+                    <tr align = center bgcolor="ccff66">
+                        <td width="20%"><font><u>Fecha Realizada</u></font></td>
+                    <td width="20%"><font><u>Total Compra</u></font></td>
+                    <td width="20%"><font><u>Descuento</u></font></td>
+                    <td width="20%"><font><u>Puntos Ganados</u></font></td>
+                    <td width="20%"><font><u>Cantidad de producto</u></font></td>
+                    <td width="20%"><font><u>Nombre producto</u></font></td>
+                    <td width="2%"><font><u>Precio Unitario</u></font></td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php
+                        $fecha = 0;
+                        $total = 0;
+                        ?>
+                        <?php foreach ($this->paginator as $red): ?>
+                            <tr align="center" bgcolor="ffff99">
+                                <?php
+                                if ($red->fecha != $fecha):
+                                    $fecha = $red->fecha;
+                                    ?>
+                                    <?php
+                                    $date = $red->fecha;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $day = (string) (int) $dia[2];
+                                    $day2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT);
+                                    $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT)
+                                    ?>
+                                    <td width="2%"><?php echo  $day2 . " - " . $month2 . " - " . $year; ?></td>
+                                <?php else: ?>
+                                    <td></td>
+                                <?php endif; ?>
+                                <?php
+                                if ($red->total != $total):
+                                    $total = $red->total;
+                                    ?>
+
+                                    <td width="20%"><?php echo '$ ' . $red->total; ?></td>
+                                    <td width="20%"><?php echo $red->descuento; ?></td>
+
+                                    <td width="20%"><?php echo $red->puntos_venta; ?></td>
+
+                                <?php else: ?>
+                                    <td></td><td></td><td></td>
+                                <?php endif; ?>
+                                <td width="20%"><?php echo $red->cantidad_producto; ?></td>
+                                <td width="20%"><?php echo $red->nombre; ?></td>
+                                <td width="20%"><?php echo $red->precio; ?></td>
+
+
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay Datos</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

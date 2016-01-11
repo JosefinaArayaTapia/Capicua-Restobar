@@ -1,0 +1,58 @@
+<?php
+$this->title = "Listado Clientes";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content" style="height: 750px">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Listado de Clientes </p>
+                <div class="diseñotablas">
+                    <a href="/administrador/agregarcliente/" style="text-decoration:none"><button class="botonnaranjo orange" >Agregar</button></a>
+                    <table cellspacing="10%" cellpadding="10%">
+                        <tr align = center  BGCOLOR="ccff66">
+                            <td width="2%"><font><u>Cliente</u></font></td>
+                        <td width="2%"><font><u>Email</u></font></td>
+                        <td width="2%"><font><u>Telefono</u></font></td>                    
+                        <td width="2%"><font><u>Puntos Acumulados</u></font></td>
+                        <td width="2%"><font><u>Visibilidad</u></font></td>
+                        <td width="8%"><font><u></u></font></td>
+
+                        </tr>
+
+                        <?php if (count($this->paginator)) : ?>
+                            <?php foreach ($this->paginator as $res): ?>
+
+                                <tr align="center" bgcolor="ffff99">
+
+                                    <td width="2%"><?php echo $res->nombre ." ". $res->apellido; ?></td>
+                                    <td width="2%"><?php echo $res->email; ?></td>
+                                    <td width="2%"><?php echo $res->telefono; ?></td>
+                                    <td width="2%"><?php echo $res->puntos_acumulados; ?></td> 
+                                    <?php if ($res->visibilidad == 1) { ?>
+                                        <td width="2%">Activo</td> 
+                                    <?php } else { ?>
+                                        <td width="2%">Inactivo</td> 
+                                    <?php } ?>
+                                    <td align="2%"><a href="/administrador/cambiarvisibilidad/id/<?php echo $res->id_usuario; ?>"><button  class="buttonedit">Editar Visibilidad</button></a></td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="3">No hay Datos</td>
+                            </tr>
+
+                        <?php endif; ?>
+
+                    </table>
+                    <?php if (count($this->paginator)): ?>
+                        <?php echo $this->paginator; ?>
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

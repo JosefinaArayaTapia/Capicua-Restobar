@@ -1,0 +1,294 @@
+/* 
+    Document   : header
+    Created on : 17-may-2013, 23:57:04
+    Author     : Josefina
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/**********************************************************************************
+*
+*  HEADER
+*
+**********************************************************************************/
+#ctn-header	
+{ 
+    height:155px;
+    padding:0 0 0 25px;
+}
+
+/*******************ZONA DE LOGO********************************/
+#ctn-header .zone-logo
+{
+    float:left;
+    width:210px;
+    height:100%;
+}
+#ctn-header .zone-logo #link-home
+{ 
+    margin:25px 0 0 0;
+    display:block;
+    width:100%;
+    height:93px;
+    background:url('../images/logo_v3.png') no-repeat ;
+
+}
+#ctn-header .zone-logo .promo
+{
+    padding:10px 0 0 0;
+    height:55px;
+    font-family:georgia;
+    font-size:12px; 
+    text-align:center;
+    line-height:16px; 
+    color:#7c726d;  
+}
+#ctn-header .zone-logo .info
+{ text-align:center; 
+  width:192px;
+  padding: 5px 0 0 10px; 
+  font-style: italic ;
+  color: #47772F;
+  font-size: 20px ; 
+  margin: -70px 0 0 250px
+}
+#ctn-header .zone-logo .socials
+{ text-align:center; 
+  width:192px;
+  padding: 0px 0 0px 15px;
+}
+/***********************************************************/
+
+/********************ZONA CLIENTE********************************/
+.zone-client a{
+    color: #382929;
+    font-family: "Chalet" ,sans-serif;
+}
+
+#ctn-header .zone-client
+{
+    float:right;
+    width:450px;
+    height:100%;
+}
+#ctn-header .zone-client .spacer
+{
+    float:left; 
+    height:101px;
+    width:25px; 
+}
+#ctn-header .zone-client .spacer-last
+{ 
+    width:15px;   
+}
+#ctn-header .zone-client .spacer-line
+{ 
+    background:url(images/fb_on.png) 50% top repeat-y;
+}
+#ctn-header .zone-client .titre	
+{ 
+    font-family: "Chalet" ,sans-serif;
+    height:36px; 
+    text-align:right;
+    font-size:23px; 
+    text-transform:uppercase;
+    padding:0 25px 0 0;  
+}
+#ctn-header .zone-client .banderole
+{ 
+    margin:15px 0 10px 0; 
+    width:100%; 
+    height:19px;
+}
+#ctn-header .zone-client .panier
+{ 
+    height:101px;
+    margin:0 0 0 25px; 
+    float:left;
+    width:115px;   
+}
+#ctn-header .zone-client .panier .titre
+{  
+    text-align:left; 
+}
+#ctn-header .zone-client .compte
+{
+    /*background: url('http://www.madein33.com/images/home/moncompte.png') 10px 45px no-repeat;*/
+    position:relative;
+    height:101px;
+    float:left; 
+    width:210px;   
+}
+
+#ctn-header .zone-client .compte .fotoperfil
+{
+    width: 103px;
+    height: 104px;
+    margin-left: 60px;
+    margin-top: -10px;
+}
+#ctn-header .zone-client .compte .nombreusuario 
+{
+    width: 200px;
+    height: 30px;
+    margin-left: 199px;
+    margin-top: -90px;
+    font-size: 22px;
+}
+
+
+#ctn-header .zone-client .compte .botonverperfil
+{
+    width: 200px;
+    height: 44px;
+    margin-left: 200px;
+    margin-top: -27px;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+#ctn-header .zone-client .compte .botonsalir 
+{
+    width: 35px;
+    height: 35px;
+    margin-left: 200px;
+    margin-top: -20px;
+    
+   
+}
+
+#ctn-header .zone-client .compte-connecte
+{ 
+    background:#86C967 
+}
+#ctn-header .zone-client .compte .titre		
+{
+    text-align:left;
+    padding:0 0 0 10px; 
+}
+#ctn-header .zone-client .compte .info
+{ 
+    position:relative; 
+    margin:0 auto; 
+    padding:3px 25px 0 0;
+    text-align:center;
+    width:114px;
+    height:36px;
+    font-family:"Chalet",sans-serif; 
+    font-size:12px;
+    color:#efefd5;
+    line-height:14px; 
+}
+#ctn-header .zone-client .compte .info a.btn
+{
+    height:26px;
+    width:110px;
+    line-height:26px;
+    display:inline-block;
+    text-align:left; 
+    padding:0 10px; 
+    margin:0px 0 10px 39px; 
+    text-decoration: none;
+    font-size:20px;
+    color:#382929; 
+    background: url("../images/fleche_action_off.png") no-repeat scroll right 50% #86C967;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+#ctn-header .zone-client .compte .info a.btn
+{ position:absolute;
+  left:54px;
+  height:26px;
+  width:110px;
+  line-height:26px;
+  display:inline-block;
+  text-align:left;
+  padding:2px 27px;
+  margin:-13px 0;
+  font-size:21px;
+  color:#382929;
+  background: url("../images/fleche_action_off.png") no-repeat scroll right 50% #86C967;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+#ctn-header .zone-client .compte .info a.btn:hover
+{ 
+    color:#86C967;
+}
+#ctn-header .popup-connexion {
+    position:relative; 
+    display:none; 
+    border:5px solid #382929; 
+    left:75px; top:66px; 
+    position:absolute; 
+    z-index:5; background:#fff; 
+    color:#382929; 
+    font-weight:normal; 
+    padding:4px 20px; 
+    opacity : 0.9; 
+    -moz-opacity : 0.9; 
+    -ms-filter: "alpha(opacity=90)"; /* IE 8 */ 
+    filter : alpha(opacity=90); /* IE < 8 */ 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px;   
+}
+#ctn-header .close-me { 
+    position:absolute; 
+    right:-12px; 
+    top:-12px; 
+    cursor:pointer;   
+}
+#ctn-header .zone-client .slogan-right	{ 
+    font-style:italic;
+    font-size:16px; 
+    line-height:26px; 
+    text-align:center; 
+    padding:16px 0 0 0; 
+}
+
+#ctn-header .zone-client .identification { 
+    position:relative; 
+    margin:0; 
+    padding:0; 
+    width:180px;    
+}
+#ctn-header .zone-client .identification label	{ 
+    font-family:Arial;    
+}
+#ctn-header .zone-client .identification input	{ 
+    font-family:Arial; 
+    font-size:11px; 
+    color:#706b69;  
+}
+#ctn-header .zone-client .identification div.text { 
+    margin:10px 0; 
+    height:30px; 
+    width:145px; 
+    background:url(../images/home/champ.png) 0 -50px no-repeat; 
+}
+#ctn-header .zone-client .identification div.text input	{ 
+    margin:8px 0 0 8px; 
+    background:none; 
+    border:0; 
+}
+#ctn-header .zone-client .identification div.btn { 
+    position:absolute; 
+    right:-5px; 
+    top:41px;
+}
+#ctn-header .zone-client .identification div.info { 
+    height:16px; 
+    text-align:right; 
+    padding:2px 0 0 0; 
+    font-size:11px; 
+    width:160px;  
+}
+#ctn-header .zone-client .bonjour-client{ 
+    text-align:center; 
+    font-style:italic; 
+}
+#ctn-header .zone-client .link-manager { 
+    padding:0 0 0 10px; 
+    line-height:16px;
+}
+

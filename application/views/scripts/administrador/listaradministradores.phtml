@@ -1,0 +1,70 @@
+<?php
+$this->title = "Listado Administradores";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Listado de Administradores </p>
+                <div class="diseñotablas">
+                    <a href="/administrador/agregaradministrador/" style="text-decoration:none"><button class="botonnaranjo orange" >Agregar</button></a>
+
+                    <table cellspacing="10%" cellpadding="10%">
+
+                        <tr align = center BGCOLOR="ccff66">
+
+                            <td width="2%"><font><u>Nombre Administrador</u></font></td>
+                        <td width="2%"><font><u>Email</u></font></td>
+                        <td width="2%"><font><u>Tipo de Permiso</u></font></td>
+                        <td width="2%"><font><u>Ultimo Acceso</u></font></td>
+
+                        </tr>
+
+                        <?php if (count($this->paginator)) : ?>
+                            <?php foreach ($this->paginator as $res): ?>
+
+                                <tr align="center" bgcolor="ffff99">
+
+                                    <td width="2%"><?php echo $res->nombre .' '.$res->apellido; ?></td>
+                                    <td width="2%"><?php echo $res->email; ?></td>
+                                    <?php if ($res->permiso == 1): ?>
+                                        <td width="2%">Super Admin</td>
+
+                                    <?php else: ?>
+                                        <td width="2%">Admin</td>
+                                    <?php endif; ?>
+                                    <?php
+                                    $date = $res->ultimo_acceso;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $day = (string) (int) $dia[2];
+                                    $time = explode(":", $date, 3);
+                                    $hora = explode(" ", $time[0], 2);
+                                    $min = (string) (int) $time [1];
+                                    $min2 = str_pad((int) $min, 2, "0", STR_PAD_LEFT)
+                                    ?>    
+                                    <td width="2%"><?php echo $day . " - " . $month . " - " . $year . " " . "/" . " " . $hora[1] . ":" . $min2; ?></td>
+
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="3">No hay Datos</td>
+                            </tr>
+
+                        <?php endif; ?>
+
+                    </table>
+                    <?php if (count($this->paginator)): ?>
+                        <?php echo $this->paginator; ?>
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

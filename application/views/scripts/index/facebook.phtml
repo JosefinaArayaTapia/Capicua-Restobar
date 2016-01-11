@@ -1,0 +1,55 @@
+<?php
+// Ver si hay un usuario de una cookie usando nuestra  clase
+$user = Capicua_Facebook::getUser();
+
+if ($user) {
+    try {
+        // Continuar sabiendo que tiene un usuario conectado que está autenticado. Observe que no tenemos
+// Inicializar un objeto y sólo llamar a la clase.
+        $user_profile = Capicua_Facebook::api('/me');
+    } catch (FacebookApiException $e) {
+        echo '<pre>' . htmlspecialchars(print_r($e, true)) . '</pre>';
+        $user = null;
+    }
+}
+?>
+<?php if ($user) { ?>
+    Your user profile is
+    <pre>
+        <?php print htmlspecialchars(print_r($user_profile, true)) ?>
+    </pre>
+<?php
+} else {
+    $return_url = 'http://capicua.local/index/facebook';  //return url (url to script)
+    $homeurl = 'http://capicua.local/index/facebook';  //return to home
+    $fbPermissions = 'publish_stream,manage_pages';
+    $loginUrl = Capicua_Facebook::getLoginUrl(array('redirect_uri' => $homeurl, 'scope' => $fbPermissions));
+   echo '<a href="'.$loginUrl.'"><img src="images/facebook-login.png" border="0"></a>';
+
+    ?>
+
+
+<?php } ?>
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '<?php echo Capicua_Facebook::getAppID() ?>',
+            cookie: true,
+            xfbml: true,
+            oauth: true
+        });
+        FB.Event.subscribe('auth.login', function(response) {
+            window.location.reload();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+            window.location.reload();
+        });
+    };
+    (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    }());
+</script>

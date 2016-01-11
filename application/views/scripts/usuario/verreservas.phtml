@@ -1,0 +1,69 @@
+
+<?php
+$this->title = "Ver Reservas";
+$this->headTitle($this->title);
+?>
+
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-cliente.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Mis Reservas 
+            </p>
+            <div class="diseñotablas">
+                <table cellspacing="10%" cellpadding="30%">
+                    <tr align = center  bgcolor="ccff66">
+                        <td width="20%"><font><u>Fecha a Reservar</u></font></td>
+                    <td width="20%"><font><u>Cantidad de Personas</u></font></td>
+                    <td width="20%"><font><u>Fecha Realizada</u></font></td>
+                    <td width="20%"><font><u>Estado de Reserva</u></font></td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php foreach ($this->paginator as $res): ?>
+                            <tr align="center"bgcolor="ffff99">
+                                <?php
+                                $date = $res->fecha_reserva;
+                                $dia = explode("-", $date, 3);
+                                $year = $dia[0];
+                                $month = (string) (int) $dia[1];
+                                $day = (string) (int) $dia[2];
+                                $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT);
+                                $dia2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT)
+                                        ;?>
+                                <td width = "20%"><?php echo $dia2 . " - " . $month2 . " - " . $year;?></td>
+                                <td width="20%"><?php echo $res->cantidad_personas; ?></td>
+                                <?php
+                                $date2 = $res->fecha_realizacion;
+                                $dia2a = explode("-", $date2, 3);
+                                $year1 = $dia2a[0];
+                                $month2a = (string) (int) $dia2a[1];
+                                $dia3 = (string) (int) $dia2a[2];
+                                $month2a1 = str_pad((int) $month2a, 2, "0", STR_PAD_LEFT);
+                                $dia4 = str_pad((int) $dia3, 2, "0", STR_PAD_LEFT)
+                                        ;?>
+                                
+                                <td width="20%"><?php echo $dia4 . " - " . $month2a1 . " - " . $year1; ?></td>
+                                <?php if ($res->id_estado_reserva == 1): ?>
+                                    <td width="20%">Pendiente</td>
+                                <?php elseif ($res->id_estado_reserva == 2): ?>
+                                    <td width="20%">Aceptada</td>                      
+                                <?php else: ?>
+                                    <td width="20%">Rechazada</td>                      
+                                <?php endif; ?>                       
+                        <?php endforeach; ?>
+                        </tr>
+<?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay Datos</td>
+                        </tr>
+                <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+<?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<?php
+$this->title = "Publicaciones mas Comentadas";
+$this->headTitle($this->title);
+?>
+
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Publicaciones mas Comentadas
+            </p>
+            <div class="diseñotablas">
+                <a href="/reportes/publicacionesmascomentadasrepo/to/<?php echo $this->to; ?>/from/<?php echo $this->from; ?>" style="text-decoration:none; float: next"><button class="botonnaranjo orange" >Exportar a PDF</button></a>
+                <?php if ($this->from || $this->to) : ?>
+                    <hr>
+                    <li><p>Desde: <?php echo $this->from; ?></li>  <li>Hasta: <?php echo $this->to; ?></li></p>
+                <?php else : ?>
+                    <h3> Reporte Historico</h3>
+                <?php endif; ?>
+
+                <table cellspacing="10%" cellpadding="10%">
+                    <tr align = center  BGCOLOR="ccff66">
+
+                        <td width="4%"><font><u>Titulo Publicacion</u></font></td>
+                    <td width="4%"><font><u>Contenido</u></td>
+                    <td width="4%"><font><u>Fecha Publicacion</u></td>
+                    <td width="2%"><font><u>Numero de Comentarios</u></font></td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php foreach ($this->paginator as $tipo) : ?>
+                            <tr align="center" bgcolor="ffff99">
+                                <?php if ($tipo): ?>
+                                    <td><?php echo $tipo->titulo; ?></td>
+                                    <td><?php echo $tipo->contenido; ?></td>
+
+                                    <?php
+                                    /* Conversion de Fecha */
+                                    $date = $tipo->fecha_publicacion;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT);
+                                    $day = (string) (int) $dia[2];
+                                    $day2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT);
+                                    $time = explode(":", $date, 3);
+                                    $hora = explode(" ", $time[0], 2);
+                                    $min = (string) (int) $time [1];
+                                    $min2 = str_pad((int) $min, 2, "0", STR_PAD_LEFT);
+                                    ?>
+                                    <td><?php echo $day2 . " - " . $month2 . " - " . $year . " " . "/" . " " . $hora[1] . ":" . $min2; ?></td>
+                                    <td><?php echo $tipo->num; ?></td>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay datos</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

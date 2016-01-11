@@ -1,0 +1,60 @@
+/* 
+    Document   : nav
+    Created on : 17-may-2013, 23:58:58
+    Author     : Josefina
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+/**********************************************************************************
+ *
+ *  NAVIGATION
+ *
+ **********************************************************************************/
+
+#ctn-navigation	
+{ 
+    font-family:"Chalet",sans-serif;
+    height:49px; line-height:41px; background:url(http://www.madein33.com/images/home/tophz_menu.png) no-repeat;
+    padding:0;
+
+    margin:0 0 10px 0; }
+#ctn-navigation	 ul{
+    
+    list-style: none;
+}
+#ctn-navigation li
+{ float:left; 
+  padding:0 18px 0 85px;
+  margin:0 8px;
+  list-style:url('../images/separador_menu.png') outside; 
+  text-transform:uppercase; 
+ 
+}
+#ctn-navigation li.first
+{ list-style:none;
+  margin:5px 0 0 -25px;
+  padding:0 0 0 15px;
+
+}
+#ctn-navigation li.first + li	{
+    list-style:none; 
+}
+
+#ctn-navigation li.last	
+{ 
+    margin-right:0;
+}
+#ctn-navigation li a
+{ 
+    font-family: "Chalet"; 
+    color:#fff; 
+    font-size:23px; 
+    text-shadow:1px 1px #47772F;
+    text-decoration: none;
+}
+#ctn-navigation li a.active
+{ 
+    color:#382929; 
+}

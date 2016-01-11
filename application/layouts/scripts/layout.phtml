@@ -1,0 +1,217 @@
+<?php echo $this->doctype(); ?> 
+<head>
+
+ <!--<link rel="shortcut icon" src="<?php // echo $this->baseUrl();     ?>/images/favicon.png">--> 
+<!-- Bootstrap -->
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script charset="utf-8" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <!--<script src="/js/jquery-1.7.2.min.js"></script>-->
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="/css/lightbox.css" rel="stylesheet" />
+    <?php
+    $this->headLink()->headLink(array('rel' => 'shortcut icon',
+        'href' => $this->baseUrl() . '/images/favicon.png'), 'PREPEND');
+    echo $this->headScript();
+    echo $this->headTitle();
+    echo $this->headMeta();
+    echo $this->headLink()->appendStylesheet('/css/lksMenuSkin3.css');
+    echo $this->headLink()->appendStylesheet('/css/style.css');
+    echo $this->headLink()->appendStylesheet('/styles/smart_cart.css');
+    echo $this->headScript()->appendFile('/js/jquery.smartCart-2.0.js');
+    echo $this->headScript()->appendFile('/js/jquery.watermarkinput.js');
+    echo $this->headScript()->appendFile('/js/jquery.oembed.js');
+    echo $this->headScript()->appendFile('/js/jquery.lksMenu.js');
+    ?> 
+    <script type="text/javascript">
+        $('document').ready(function(){
+            $('.menu').lksMenu();
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#datepicker').datepicker({ 
+                dateFormat: 'dd-mm-yy',
+                minDate: '0'
+                
+            });  // cualquier otro
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $( "#from" ).datepicker({ // reportes
+                dateFormat: 'dd-mm-yy',
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function( selectedDate ) {
+                    $( "#to" ).datepicker( "option", "minDate", selectedDate );
+                }
+            });
+            $( "#to" ).datepicker({
+                dateFormat: 'dd-mm-yy',
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function( selectedDate ) {
+                    $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">//<![CDATA[ 
+        $(function(){
+            $(".toggle").hide(); //Hide .toggles
+            $(window).load(function(){
+                $('.toggle').not(':hidden')
+                .prev('.trigger').trigger("click"); //Simulate click on visible .toggle(s) h3(s)
+            });
+            $('.trigger').each(function() { //For each .trigger
+                var theActive = $.cookie($(this).attr('id')); //Retrieve the cookies
+                if (theActive) { //Verify if cookies exist
+                    $('#' + theActive).next(".toggle").slideDown(700); //And slide down the respective .toggle
+                }
+            });
+            $(".trigger").toggle( //Toggle permits alternate clicks
+            function() { //Abierto
+
+                $(this).next('.toggle').slideDown('slow'); //On odd clicks, .toggle slides down...
+                $.cookie($(this).attr('id'), $(this).attr('id')); 
+
+                //...and the cookie is set by its ids.
+            }, 
+            function() {//CErrar
+                $(this).next('.toggle').slideUp('slow'); //On even clicks, .toggle slides up...
+                $.cookie($(this).attr('id'), null); //...and the cookie is deleted.
+            });
+        });//]]>
+    </script>
+    <script type="text/javascript">
+   
+        $(document).ready(function(){
+            // Call Smart Cart    	
+            $('#SmartCart').smartCart();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+      /*      $("input#nombre").Watermark("Campo Obligatorio");
+            $("input#apellido").Watermark("Campo Obligatorio");
+            $("input#contraseña").Watermark("Campo Obligatorio");
+            $("input#email").Watermark("Campo Obligatorio");
+            $("input#mesa").Watermark("Campo Obligatorio");
+            $("input#precio").Watermark("Campo Obligatorio");
+            $("input#puntos_producto").Watermark("Campo Obligatorio");
+            $("input#personas").Watermark("Campo Obligatorio");
+            //            $("textarea#observacion").Watermark("Campo Obligatorio");
+
+            $("textarea#mensaje").Watermark("Campo Obligatorio");*/
+
+
+        });       
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#inputField").Watermark("Agrega tu comentario ...");
+        });       
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() 
+        {
+            // comentario
+            $("#update_button").click(function() 
+            {     
+                var updateval = $("#inputField").val();
+                      
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: $("#tweetForm").serialize(),
+                    url: "/publicaciones/agregarcomentario",
+                    // data: { postid: updateidpost,iduser:iduser,updateval:updateval },
+                    success: function(html)
+                    {
+                        $("#comentarios ").prepend($(html).fadeIn('slow'));
+                        $("#inputField").val('');	
+                        $("#inputField").focus();
+                        $("#stexpand").oembed(updateval);
+                    }
+                });
+                return false;
+            });
+            
+
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(function(){  
+            //  document.getElementById('puntos').value=0;
+            $('#cliente').change(function(){
+                var ajax = $.ajax({
+                    type: "GET",
+                    url: "/administrador/getmodelos/cliente/" + $(this).val(),
+                    async: true,
+                    dataType: "json",
+                    beforeSend: function(x) {
+                        if(x && x.overrideMimeType) {
+                            x.overrideMimeType("application/j-son;charset=UTF-8");
+                        }
+                    },
+                    success: function(data){
+                      
+                        for (var i = 0; i < data.length; i++) {
+                            options=data[i].puntos_acumulados;
+                        }
+                        document.getElementById('puntos').value=options;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--    //funcion javascript para ocultar el selector de cliente-->
+    <script type="text/javascript">
+        <!--
+        function mostrarReferencia(){
+            var miValue = $("#tipo" ).val();
+           
+            
+            //Si la opcion con id Conocido_1 (dentro del documento > formulario con name fcontacto >   y a la vez dentro del array de Conocido) esta activada
+            if (miValue==1 ) {
+                //muestra (cambiando la propiedad display del estilo) el div con id 'desdeotro'
+                document.getElementById('getcliente').style.display='block';
+                //por el contrario, si no esta seleccionada
+            } else {
+                //oculta el div con id 'desdeotro'
+                document.getElementById('getcliente').style.display='none';
+            }
+        }
+        -->
+    </script>
+
+
+</head>
+<body >
+    <div id="enteo-site">
+        <div id="main">
+
+
+            <?php echo $this->render('header.phtml'); ?>
+            <?php echo $this->render('nav.phtml'); ?>
+            <?php echo $this->layout()->content; ?>
+            <?php echo $this->render('footer.phtml'); ?>
+
+        </div>
+    </div>
+</body>
+</html>

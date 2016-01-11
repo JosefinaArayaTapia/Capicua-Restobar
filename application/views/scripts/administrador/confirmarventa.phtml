@@ -1,0 +1,126 @@
+<?php
+$this->title = "Confirmar Venta";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center" style="width: 750px;">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                COnfirmar Venta
+            </p>
+            <center>
+                <form class="div_form" method="POST" action="/administrador/confirmarventa" style="width: 728px; height: 1500px; margin-left:20px;">
+                    <table>
+                        <tbody>
+                            <tr style="width: 72%; margin-left:5%; margin-bottom: -5%;">
+                                <td>Cliente</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->element->getElement('cliente'); ?></td>
+                            </tr>  
+                            <tr style="width: 72%; margin-left:5%;margin-bottom: -5%;">
+                                <td>Puntos</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->element->getElement('puntos')->setvalue($this->punto); ?></td>
+                            </tr>
+                            <tr style="width: 72%; margin-left:5%; margin-bottom: -5%;">
+                                <td>Descuento</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->element->getElement('descuento'); ?></td>
+                            </tr>
+                            <tr style="width: 72%; margin-left:4%; margin-bottom: -5%;">
+                                <td>observacion</td>
+                                <td style="margin-top: 32px;padding-bottom: 28px;padding-top: 0px;"><?php echo $this->element->getElement('observacion'); ?></td>
+                            </tr>
+                            <tr style="width: 72%; margin-left:5%; margin-top: -180px;">
+                                <td style="margin-top: -10px;">Mesa</td>
+                                <td style="margin-top: 32px;padding-bottom: 10px;padding-top: 104px;"><?php echo $this->element->getElement('mesa'); ?></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <table style="width: 60%;margin-left:-325px;">
+                        <tr>
+                            <td>                    
+                                <div class="scMain">  
+                                    <?php
+                                    $product_array = $this->productobase;
+                                    $product_list = $this->listaventa;
+                                    if (!empty($product_list)) {
+                                        ?>             
+                                        <div class="scCartHeader" style="width: 680px;">
+                                            <label class="scCartTitle scCartTitle1">Producto</label>
+                                            <label class="scCartTitle scCartTitle2">Precio</label>
+                                            <label class="scCartTitle scCartTitle3">Cantidad</label>
+                                            <label class="scCartTitle scCartTitle4">Total</label>
+                                        </div>	 
+                                        <div class="scCartList" style="min-height: 300px;">
+                                            <?php
+                                            $sub_total = 0;
+                                            foreach ($product_array as $base) {
+                                                foreach ($product_list as $product) {
+                                                    $chunks = explode('|', $product);
+                                                    $product_id = $chunks[0];
+                                                    if ($base->id_producto == $product_id) {
+                                                        $product_qty = $chunks[1];
+                                                        $product_name = $base->nombre;
+                                                        $product_img = $base->imagen;
+                                                        $product_price = $base->precio;
+                                                        $product_amount = $product_price * $product_qty;
+                                                        // calculate the subtotal
+                                                        $sub_total = $sub_total + $product_amount;
+                                                        // echo "Product Id: ".$product_id." Quantity: ".$product_qty."<br>";
+                                                        ?>
+
+                                                        <div id="divCartItem2" class="scCartItem">
+                                                            <div class="scCartItemTitle scCartItemTitle1">
+                                                                <img src="/images/carta/<?php echo $product_img; ?>" class="scProductImageSmall">
+                                                                <div>
+                                                                    <strong><?php echo $product_name; ?></strong>
+                                                                </div>
+                                                            </div>
+                                                            <label class="scCartItemTitle scCartItemTitle2"><?php echo $product_price; ?></label>
+                                                            <label id="lblQuantity2" class="scCartItemTitle scCartItemTitle3"><?php echo $product_qty; ?></label>
+                                                            <label id="lblTotal2" class="scCartItemTitle scCartItemTitle4"><?php echo $product_amount; ?></label>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <div style="border:1px; width: 674px;" class="scBottomBar">
+                                            <?php
+                                            // set the request for continue shopping
+                                            if (isset($product_list)) {
+                                                foreach ($product_list as $p_list) {
+                                                    $prod_options = '<input type="hidden" name="products_selected[]" value="' . $p_list . '">';
+                                                    echo $prod_options;
+                                                }
+                                            }
+                                            ?>
+                                            <a href="/administrador/agregarventa" >
+                                                <input  readonly="readonly" style="width:200px;height:32px;float:left;margin-top: -6px;cursor: pointer;"  class="scCheckoutButton" value="Crear Otra Venta">
+                                            </a>
+
+                                            <label class="scLabelSubtotalValue" style="margin-top: -13px;"><?php echo $sub_total; ?></label>
+                                            <label class="scLabelSubtotalText" style="margin-top: -13px;">Subtotal: </label>
+                                        </div>          
+                                        <?php
+                                    } else {
+                                        echo "<strong>Venta Vacia</strong>";
+                                        ?>
+                                        <a href="/administrador/agregarventa" >
+                                            <input style="width:200px;height:32px;float:left;padding-top:0px; cursor: pointer;" class="scCheckoutButton" value="Volver a Ventas">
+                                        </a>
+                                    <?php } ?>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <?php echo $this->element->getElement('Agregar'); ?>
+                </form>
+            </center>
+        </div>
+    </div>
+</div>
+

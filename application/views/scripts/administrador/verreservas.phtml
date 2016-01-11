@@ -1,0 +1,71 @@
+<?php
+$this->title = "Listado Reservas";
+$this->headTitle($this->title);
+?>
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <div id="ctn-slider">
+                <p class="sidebar-title"><img src="/images/guardar.png"> Listado de Reservas </p>
+                <div class="diseñotablas">
+                    <table cellspacing="10%" cellpadding="30%">
+                        <tr align = center  BGCOLOR="ccff66">
+
+                            <td width="20%"><font><u>Nombre Cliente</u></font></td>
+                        <td width="15%"><font><u>Cantidad de Personas</u></font></td>
+                        <td width="20%"><font><u>fecha a reservar</u></font></td>                    
+                        <td width="20%"><font><u>Estado de Reserva</u></font></td>
+                        <td width="20%"><font><u></u></font></td>
+                        </tr>
+
+                        <?php if (count($this->paginator)) : ?>
+                            <?php foreach ($this->paginator as $res): ?>
+
+                                <tr align="center" bgcolor="ffff99" >
+
+                                    <td width="2%"><?php echo $res->nombre . ' ' . $res->apellido; ?></td>
+                                    <td width="2%"><?php echo $res->cantidad_personas; ?></td>
+                                    <?php
+                                    $date = $res->fecha_reserva;
+                                    $dia = explode("-", $date, 3);
+                                    $year = $dia[0];
+                                    $month = (string) (int) $dia[1];
+                                    $day = (string) (int) $dia[2];
+                                    $month2 = str_pad((int) $month, 2, "0", STR_PAD_LEFT);
+                                    $dia2 = str_pad((int) $day, 2, "0", STR_PAD_LEFT)
+                                    ;
+                                    ?>
+                                    <td width = "20%"><?php echo $dia2 . " - " . $month2 . " - " . $year; ?></td>
+        <?php if ($res->id_estado_reserva == 1): ?>
+                                        <td width="2%">Pendiente</td>
+
+        <?php elseif ($res->id_estado_reserva == 2): ?>
+                                        <td width="2%">Aceptada</td>
+
+
+        <?php else: ?>
+                                        <td width="2%">Rechazada</td>
+
+                                    <?php endif; ?>
+                                    <td align="center"><a href="/administrador/editarreserva/id/<?php echo $res->id_reserva ?>"><button class="buttonedit" style="margin-left: 20px">Editar</button></a></td>
+                            <?php endforeach; ?>
+                            </tr>
+<?php else : ?>
+                            <tr>
+                                <td colspan="3">No hay Datos</td>
+                            </tr>
+
+<?php endif; ?>
+
+                    </table>
+                    <?php if (count($this->paginator)): ?>
+                        <?php echo $this->paginator; ?>
+<?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

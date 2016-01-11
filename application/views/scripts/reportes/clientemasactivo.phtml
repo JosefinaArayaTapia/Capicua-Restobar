@@ -1,0 +1,51 @@
+<?php
+$this->title = "Clientes Mas Activos";
+$this->headTitle($this->title);
+?>
+
+<div id="enteo-page">
+    <div id="ctn-content">
+        <?php echo $this->render('left-admin.phtml') ?>
+        <div class="center">
+            <p class="sidebar-title">
+                <img src="/images/guardar.png">
+                Reporte  Clientes Más Activo (ventas)
+            </p>
+            <div class="diseñotablas">
+                <a href="/reportes/clientesmasactivosventarepo/to/<?php echo $this->to;?>/from/<?php echo $this->from;?>" style="text-decoration:none; float: next"><button class="botonnaranjo orange" >Exportar a PDF</button></a>
+                 <?php if ($this->from || $this->to) : ?>
+                    <hr>
+                    <li><p>Desde: <?php echo $this->from; ?></li>  <li>Hasta: <?php echo $this->to; ?></li></p>
+                <?php else : ?>
+                    <h3> Reporte Historico</h3>
+                <?php endif; ?>
+                <table cellspacing="10%" cellpadding="10%">
+                    <tr align = center  BGCOLOR="ccff66">
+                        
+                    <td width="4%"><font><u>Nombre</u></font></td>
+                    <td width="4%"><font><u>Email</u></td>
+                    <td width="2%"><font><u>Total de Ventas Hechas</u></font></td>
+                    </tr>
+                    <?php if (count($this->paginator)) : ?>
+                        <?php foreach ($this->paginator as $tipo) : ?>
+                            <tr align="center" bgcolor="ffff99">
+                                <?php if ($tipo): ?>
+                                    
+                                    <td><?php echo $tipo->nombre ." ".$tipo->apellido; ?></td>
+                                    <td><?php echo $tipo->email; ?></td>
+                                    <td><?php echo $tipo->num; ?></td>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                        <tr>
+                            <td colspan="3">No hay datos</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+                <?php if (count($this->paginator)): ?>
+                    <?php echo $this->paginator; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

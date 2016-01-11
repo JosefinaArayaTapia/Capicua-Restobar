@@ -1,0 +1,18 @@
+<div class="stbody" id="stbody<?php echo $this->postid ?>">
+    <div class="sttimg">
+        <img src="<?php echo $this->baseUrl(); ?>/images/usuarios/<?php echo $this->foto ?>" class='big_face'/>
+    </div> 
+    <div class="nombreusuario">
+        <p><?php echo $this->nombre ?>
+        </p>
+    </div> 
+
+    <?php if ($this->tipo_user == 1): ?>
+        <div class="sttext">
+            <a href="<?php echo $this->baseUrl(); ?>/publicaciones/eliminarcomentario/id/<?php echo $this->postid; ?>"  class="stdelete" title="Borrar comentario">X</a>
+        <?php endif; ?>
+        <?php echo $this->comment; ?>
+        <div class="sttime"><?php ?></div> 
+    </div> 
+
+</div>
